@@ -1,4 +1,4 @@
-package negocio.SolitarioSpider;
+package negocio;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -150,6 +150,10 @@ public class SolitarioSpider {
             cartas[index] = cartas[i];
             cartas[i] = a;
         }
+    }
+    
+    public static void main(String[] args) {
+        SolitarioSpider solitarioSpider = new SolitarioSpider();
     }
 
 }

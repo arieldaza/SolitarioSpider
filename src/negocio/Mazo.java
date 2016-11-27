@@ -1,4 +1,4 @@
-package negocio.SolitarioSpider;
+package negocio;
 
 import java.util.ArrayList;
 
@@ -145,6 +145,11 @@ public class Mazo {
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Mazo{" + cartas + '}';
     }
 
 }
