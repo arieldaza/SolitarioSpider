@@ -54,10 +54,10 @@ public class SolitarioSpider {
         }
 
         init();
-        for (int i = 0; i < 11; i++) {
-            System.out.println(mazos.get(i).toString());
-
-        }
+//        for (int i = 0; i < 11; i++) {
+//            System.out.println(mazos.get(i).toString());
+//
+//        }
     }
 
     public void clearTemporal() {
@@ -114,7 +114,8 @@ public class SolitarioSpider {
         Mazo mazo = mazos.get(nroMazo);
         if (mazo.validarCorte(posicion)) {
             this.temp = mazo.cortar(posicion);
-            this.indexTemp = posicion;
+            this.indexTemp = nroMazo;
+            System.out.println("corte: "+temp.toString());
         }
     }
 
@@ -123,18 +124,30 @@ public class SolitarioSpider {
      * @param nroMazo
      */
     public void mover(int mazoFinal) {
+        System.out.println("mover");
+        System.out.println("index temp: " + indexTemp);
+        System.out.println("index destino: " + mazoFinal);
         if (mazoFinal == indexTemp) {//caso 1 mover al mismo lugar
             mazos.get(indexTemp).addCorte(temp);
         } else {
-            Mazo aux = mazos.get(mazoFinal);
-            if (aux.validarAddCorte(aux)) {
-                mazos.get(mazoFinal).addCorte(temp);
-                mazos.get(indexTemp).voltearTop();
-            } else {
-                mazos.get(indexTemp).addCorte(temp);
+            if (temp != null) {
+                Mazo aux = mazos.get(mazoFinal);
+                System.out.println("temp :" + temp.toString());
+                System.out.println("destino :" + aux.toString());
+                if (aux.validarAddCorte(temp)) {
+                    mazos.get(mazoFinal).addCorte(temp);
+                    mazos.get(indexTemp).voltearTop();
+                } else {
+                    System.out.println("mover no valido");
+                    mazos.get(indexTemp).addCorte(temp);
+                }
             }
         }
         clearTemporal();
+    }
+
+    public ArrayList<Mazo> getMazos() {
+        return mazos;
     }
 
     public Mazo getTemp() {
@@ -151,9 +164,18 @@ public class SolitarioSpider {
             cartas[i] = a;
         }
     }
-    
+
     public static void main(String[] args) {
         SolitarioSpider solitarioSpider = new SolitarioSpider();
+    }
+
+    public Mazo getMazo(int nroMazo) {
+        return mazos.get(nroMazo);
+    }
+
+    public void previewMover() {
+        mazos.get(indexTemp).addCorte(temp);
+        clearTemporal();
     }
 
 }

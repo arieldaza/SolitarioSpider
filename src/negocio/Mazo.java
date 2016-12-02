@@ -63,6 +63,7 @@ public class Mazo {
         Mazo corte = new Mazo();
         for (int i = posicionCarta; i < cartas.size(); i++) {
             corte.addCarta(cartas.remove(i));
+            i--;
         }
         return corte;
     }
@@ -71,17 +72,15 @@ public class Mazo {
         return cartas;
     }
 
-    public int cantCartasVisibles() {
-        return this.cartas.size() - this.cantCartasNoVisibles();
+    public int cantCartasNoVisibles() {
+        return this.cartas.size() - this.cantCartasVisibles();
     }
 
-    public int cantCartasNoVisibles() {
+    public int cantCartasVisibles() {
         int cant = 0;
         for (Carta carta : cartas) {
             if (carta.esVisible()) {
                 cant++;
-            } else {
-                return cant;
             }
         }
         return cant;
@@ -120,7 +119,7 @@ public class Mazo {
 
     public Carta getTop() {
         if (!this.vacio()) {
-            return cartas.get(cartas.size());
+            return cartas.get(cartas.size()-1);
         }
         return null;
     }
@@ -150,6 +149,10 @@ public class Mazo {
     @Override
     public String toString() {
         return "Mazo{" + cartas + '}';
+    }
+
+    public int size() {
+        return cartas.size();
     }
 
 }

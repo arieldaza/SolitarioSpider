@@ -1,4 +1,4 @@
-package negocio.SolitarioSpider;
+package negocio;
 
 /**
  * @author Ariel Daza
